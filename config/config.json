@@ -1,9 +1,10 @@
 {
   "development": {
     "username": "root",
-    "password": null,
-    "database": "database_development",
-    "host": "127.0.0.1",
+    "password": "password",
+    "database": "niu-backend",
+    "port": "3306",
+    "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
