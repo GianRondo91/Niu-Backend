@@ -11,19 +11,10 @@ module.exports = {
       delivered: {
         type: Sequelize.BOOLEAN
       },
-      idOrder_product:{
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Order_product',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
-      },
       idUser:{
         type: Sequelize.INTEGER,
         references: {
-          model: 'User',
+          model: 'Users',
           key: 'id'
         },
         onUpdate: 'CASCADE',

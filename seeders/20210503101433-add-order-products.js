@@ -3,7 +3,7 @@ let order_products = [
   {
     count: 1,
     idProduct: 1,
-    idOrder_product: 1,
+    idOrder: 1,
   }
 ];
 

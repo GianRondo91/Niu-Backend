@@ -14,16 +14,16 @@ module.exports = {
       idProduct:{
         type: Sequelize.INTEGER,
         references: {
-          model: 'Product',
+          model: 'Products',
           key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
-      idOrder_product:{
+      idOrder:{
         type: Sequelize.INTEGER,
         references: {
-          model: 'Order_product',
+          model: 'Orders',
           key: 'id'
         },
         onUpdate: 'CASCADE',

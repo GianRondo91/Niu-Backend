@@ -19,7 +19,7 @@ let users = [
   }
 ];
 
-users = users.map((user) => ({...user, updateAt: new Date, createdAt: new Date}));
+users = users.map((user) => ({...user, updatedAt: new Date, createdAt: new Date}));
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {

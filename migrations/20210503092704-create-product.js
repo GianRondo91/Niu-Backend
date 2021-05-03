@@ -14,17 +14,11 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
+      price: {
+        type: Sequelize.DOUBLE
+      },
       image: {
         type: Sequelize.STRING
-      },
-      idUser:{
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'User',
-          key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,

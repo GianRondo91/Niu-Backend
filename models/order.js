@@ -13,9 +13,9 @@ module.exports = (sequelize, DataTypes) => {
                 foreignKey: 'idUser',
                 targetKey: 'id'
             });
-            this.belongsTo(models.Order_product, {
-                foreignKey: 'idOrder_product',
-                targetKey: 'id'
+            this.hasMany(models.Order_product, {
+                sourceKey: 'id',
+                foreignKey: 'idOrder'
             });
         }
     };

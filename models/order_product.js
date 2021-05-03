@@ -9,13 +9,13 @@ module.exports = (sequelize, DataTypes) => {
     class Order_product extends Model {
         static associate(models) {
             // define association here
-            this.hasMany(models.Order, {
-                sourceKey: 'id',
-                foreignKey: 'idOrder'
+            this.belongsTo(models.Order, {
+                foreignKey: 'idOrder',
+                targetKey: 'id'
             });
-            this.hasMany(models.Product, {
-                sourceKey: 'id',
-                foreignKey: 'idProduct'
+            this.belongsTo(models.Product, {
+                foreignKey: 'idProduct',
+                targetKey: 'id'
             });
         }
     };
