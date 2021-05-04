@@ -11,8 +11,12 @@ const auth = require('./middleware/auth');
 //RESOURCES
 router.use('/users', auth, userRouter);
 router.use('/products', auth, productRouter);
+router.use('/orders/:orderId/products', function (req, res, next) {
+    req.orderId = req.params.orderId;
+    req.count = req.query.count;
+    next();
+}, auth, order_productRouter);
 router.use('/orders', auth, orderRouter);
-router.use('/order-products', auth, order_productRouter);
 
 
 module.exports = router;
