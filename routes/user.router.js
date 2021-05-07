@@ -56,12 +56,23 @@ router.get('/', async(req, res) => {
     };
 });
 
+//getID
+router.get('/:id', async(req, res) => {
+    try {
+        res.json(await userController.getById(req.params.id));
+    } catch (error) {
+        res.status(500).json({
+            message: 'Server Error' + error
+        });
+    };
+});
+
 //update
 router.put('/:id', async(req, res) => {
     try {
         let id = req.params.id;
 
-        if (!req.user.isAdmin && id !== req.user.id) {
+        if (!req.user.isAdmin && parseInt(id) !== req.user.id) {
             res.sendStatus(403);
             return;
         }

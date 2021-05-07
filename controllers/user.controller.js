@@ -40,6 +40,10 @@ class UserController {
         return User.findAll();
     };
 
+    async getById(id) {
+        return User.findOne({where: {id}});
+    };
+
     async LogOut() {}
 
     async update(user, id) {

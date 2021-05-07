@@ -8,7 +8,7 @@ const productController = require('../controllers/product.controller');
 //getAll
 router.get('/', async(req, res) => {
     try {
-        res.json(await productController.getAll());
+        res.json(await productController.getAll(req.query.category));
     } catch (error) {
         res.status(500).json({
             message: 'Server Error' + error
