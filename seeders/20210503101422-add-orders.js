@@ -3,8 +3,9 @@
 let orders = [
   {
     delivered: true,
-    // idOrder_product: 1,
     idUser: 1,
+    price: 8,
+    productCount: 1
   }
 ];
 

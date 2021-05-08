@@ -11,6 +11,12 @@ module.exports = {
       delivered: {
         type: Sequelize.BOOLEAN
       },
+      price: {
+        type: Sequelize.DOUBLE
+      },
+      productCount: {
+        type: Sequelize.INTEGER
+      },
       idUser:{
         type: Sequelize.INTEGER,
         references: {

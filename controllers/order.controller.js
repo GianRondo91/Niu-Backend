@@ -1,11 +1,22 @@
-const {Order} = require('../models');
+const {Order, Order_product} = require('../models');
 
 class OrderController{
     constructor(){}
 
     async create(order, userId){
         order.idUser = userId;
-        return Order.create(order);
+        order.delivered = false;
+
+        if(!order.products && !order.products.length){
+            throw 'La orden debe contener productos.';
+        };
+
+        let createdOrder = await Order.create(order);
+
+        for(let product of order.products){
+            console.log(product)
+            await Order_product.create({idOrder: createdOrder.id, idProduct: product.id, count: product.count});
+        };
     };
 
     async getAll(userId){
@@ -15,25 +26,49 @@ class OrderController{
         return Order.findAll({where: {idUser: userId}});
     };
 
-    async findById(id){
+    async findById(id, userId){
         if(userId == null){
             return Order.findOne({where: {id}});
         }
         return Order.findOne({where: {id, idUser: userId}});
     }
 
-    async update(order, id){
+    async update(order, id, userId){
         if(userId == null){
             return Order.update(order, {where:{id}});
         }
         return Order.update(order, {where:{id, idUser: userId}});
     };
 
-    async delete(id){
-        if(userId == null){
-            return Order.destroy({where:{id}});
+    async delete(id, userId){
+
+        let order = this.findById(id, userId);
+
+        if(!order)
+        {
+            throw 'Orden inexistente';
         }
-        return Order.destroy({where:{id, idUser: userId}});
+
+        if(order.delivered)
+        {
+            throw 'No es posible borrar ordenes entegadas';
+        }
+
+        await Order_product.destroy({where:{idOrder: id}});
+
+        return Order.destroy({where:{id}});
+    };
+
+    async getAllProducts(id, userId){
+
+        let order = this.findById(id, userId);
+
+        if(!order)
+        {
+            throw 'Orden inexistente';
+        }
+
+        return Order_product.findAll({where:{idOrder:id}});
     };
 };
 

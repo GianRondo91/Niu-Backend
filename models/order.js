@@ -20,8 +20,9 @@ module.exports = (sequelize, DataTypes) => {
         }
     };
     Order.init({
-        delivered: DataTypes.BOOLEAN
-            // iso: DataTypes.STRING
+        delivered: DataTypes.BOOLEAN,
+        price: DataTypes.DOUBLE,
+        productCount: DataTypes.INTEGER
     }, {
         sequelize,
         modelName: 'Order',

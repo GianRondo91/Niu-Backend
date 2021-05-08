@@ -8,8 +8,13 @@ const userController = require('../controllers/user.controller');
 //register
 router.post('/', async(req, res) => {
     try {
+        if (!req.user.isAdmin && req.body.isAdmin) {
+            res.sendStatus(403);
+            return;
+        }
+
         let status = 'Usuario creado con exito';
-        let newUser = await userController.register(req.body);
+        let newUser = await userController.create(req.body);
 
         res.json({ newUser, status });
     } catch (error) {

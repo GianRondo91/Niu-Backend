@@ -7,8 +7,8 @@ const secret = process.env.JWT_SECRET || 'pwsSecret';
 class UserController {
     constructor() {}
 
-    async register(user) {
-        user.isAdmin = false;
+    async create(user) {
+        user.isAdmin = !!user.isAdmin;
         user.password = await bcrypt.hash(user.password, 6);
         return User.create(user);
     };
@@ -32,7 +32,8 @@ class UserController {
 
         return {
             token: jwt.sign(payload, secret),
-            id: user.id
+            id: user.id,
+            isAdmin: user.isAdmin
         }
     };
 

@@ -74,4 +74,15 @@ router.delete('/:id', async(req, res) => {
     };
 });
 
+//getAll
+router.get('/:id/products', async(req, res) => {
+    try {
+        res.json(await orderController.getAllProducts(req.params.id, req.user.id));
+    } catch (error) {
+        res.status(500).json({
+            message: 'Server Error' + error
+        });
+    };
+});
+
 module.exports = router;
