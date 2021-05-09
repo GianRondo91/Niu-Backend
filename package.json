@@ -1,0 +1,30 @@
+{
+  "name": "niu-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "mysql": "../../bin/start",
+    "clean": "../../bin/cleanup",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GianRondo91/Niu-Backend.git"
+  },
+  "author": "Giancarlo Rondo Santa cruz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GianRondo91/Niu-Backend/issues"
+  },
+  "homepage": "https://github.com/GianRondo91/Niu-Backend#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.2"
+  }
+}
