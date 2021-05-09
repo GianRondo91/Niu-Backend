@@ -8,6 +8,13 @@ class UserController {
     constructor() {}
 
     async create(user) {
+
+        const existingUser = await User.findOne({ where: { email: user.email } });
+
+        if (existingUser) {
+            throw 'Ya existe una cuenta con el email ' + user.email;
+        }
+
         user.isAdmin = !!user.isAdmin;
         user.password = await bcrypt.hash(user.password, 6);
         return User.create(user);
@@ -33,7 +40,8 @@ class UserController {
         return {
             token: jwt.sign(payload, secret),
             id: user.id,
-            isAdmin: user.isAdmin
+            isAdmin: user.isAdmin,
+            name: user.name
         }
     };
 

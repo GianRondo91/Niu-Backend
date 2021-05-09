@@ -24,7 +24,11 @@ router.post('/', async(req, res) => {
 //getAll
 router.get('/', async(req, res) => {
     try {
-        res.json(await orderController.getAll(getUserId(req)));
+        let delivered = null;
+        if(req.query.delivered){
+            delivered = req.query.delivered === '1';
+        }
+        res.json(await orderController.getAll(getUserId(req), delivered));
     } catch (error) {
         res.status(500).json({
             message: 'Server Error' + error

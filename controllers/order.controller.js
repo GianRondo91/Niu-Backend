@@ -19,11 +19,19 @@ class OrderController{
         };
     };
 
-    async getAll(userId){
-        if(userId == null){
-            return Order.findAll();
+    async getAll(userId, delivered){
+
+        if(delivered === null || delivered === undefined){
+            if(userId == null){
+                return Order.findAll();
+            }
+            return Order.findAll({where: {idUser: userId}});
         }
-        return Order.findAll({where: {idUser: userId}});
+
+        if(userId == null){
+            return Order.findAll({where: {delivered}});
+        }
+        return Order.findAll({where: {idUser: userId, delivered}});
     };
 
     async findById(id, userId){

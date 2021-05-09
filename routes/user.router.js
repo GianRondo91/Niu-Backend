@@ -8,7 +8,7 @@ const userController = require('../controllers/user.controller');
 //register
 router.post('/', async(req, res) => {
     try {
-        if (!req.user.isAdmin && req.body.isAdmin) {
+        if (req.body.isAdmin && (!req.user || !req.user.isAdmin)) {
             res.sendStatus(403);
             return;
         }
@@ -19,7 +19,7 @@ router.post('/', async(req, res) => {
         res.json({ newUser, status });
     } catch (error) {
         res.status(500).json({
-            message: 'Server error' + error
+            message: error
         });
     };
 });
@@ -29,9 +29,6 @@ router.post('/login', async(req, res) => {
     try {
         let email = req.body.email;
         let password = req.body.password;
-
-        console.log('Comprobación del post login', email, password);
-
         let token = await userController.logIn(email, password);
 
         if (token) {
@@ -41,7 +38,7 @@ router.post('/login', async(req, res) => {
         };
     } catch (error) {
         res.status(500).json({
-            message: 'Server Error' + error
+            message: error
         });
     };
 });
@@ -56,7 +53,7 @@ router.get('/', async(req, res) => {
         };
     } catch (error) {
         res.status(500).json({
-            message: 'Server Error' + error
+            message: error
         });
     };
 });
@@ -67,7 +64,7 @@ router.get('/:id', async(req, res) => {
         res.json(await userController.getById(req.params.id));
     } catch (error) {
         res.status(500).json({
-            message: 'Server Error' + error
+            message: error
         });
     };
 });
@@ -88,7 +85,7 @@ router.put('/:id', async(req, res) => {
         res.json({ status, result });
     } catch (error) {
         res.status(500).json({
-            message: 'Server Error' + error
+            message: error
         });
     };
 });
@@ -101,7 +98,7 @@ router.get('/logout', async(req, res) => {
         res.json({ status });
     } catch (error) {
         res.status(500).json({
-            message: 'Server Error' + error
+            message: error
         });
     };
 });
@@ -111,7 +108,7 @@ router.delete('/:id', async(req, res) => {
     try {
         let id = req.params.id;
 
-        if (!req.user.isAdmin && id !== req.user.id) {
+        if (!req.user.isAdmin && parseInt(id) !== req.user.id) {
             res.sendStatus(403);
             return;
         }
@@ -122,7 +119,7 @@ router.delete('/:id', async(req, res) => {
         res.json({ status, result });
     } catch (error) {
         res.status(500).json({
-            message: 'Server Error' + error
+            message: error
         });
     };
 });
